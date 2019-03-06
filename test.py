@@ -144,8 +144,8 @@ class unittests(unittest.TestCase):
       sys.stdout = sys.__stdout__
 	  printtest=capturedOutput.getvalue()
 	  
-	  if re.search(r'\bUnable to retrieve CA cert. Exiting.\b', funcreturn): rfunc=False
-	  if re.search(r'\bUnable to sign CSR. Exiting.\b', funcreturn): rfunc=False
+	  if re.search(r'\bUnable to retrieve CA cert. Exiting.\b', printtest): rfunc=False
+	  if re.search(r'\bUnable to sign CSR. Exiting.\b', printtest): rfunc=False
 	  
 	  self.assertTrue(rfunc)
 	  
