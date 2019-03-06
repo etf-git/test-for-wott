@@ -85,6 +85,18 @@ class unittests(unittest.TestCase):
 	  printtest=capturedOutput.getvalue()
       self.assertTrue(printtest!='Ping failed.')
 	  
+  def test_say_hello(self):
+  #test def say_hello()  check for correct function and return value and test value is JSON
+  	  funcreturn=say_hello()
+	  self.assertTrue(funcreturn!=None)
+	  capturedOutput = StringIO.StringIO()
+      sys.stdout = capturedOutput
+      say_hello()
+      sys.stdout = sys.__stdout__
+	  printtest=capturedOutput.getvalue()
+      self.assertTrue(printtest!='Hello failed.')
+	  self.assertTrue(isinstance(funcreturn, list))
+	  
 	  
 if __name__ == '__main__':
     unittest.main(failfast=True, exit=False)
