@@ -86,7 +86,7 @@ class unittests(unittest.TestCase):
       self.assertTrue(printtest!='Ping failed.')
 	  
   def test_say_hello(self):
-  #test def say_hello()  check for correct function and return value and test value is JSON
+  #test def say_hello() check for correct work function and return value and test value is JSON
   	  funcreturn=say_hello()
 	  self.assertTrue(funcreturn!=None)
 	  capturedOutput = StringIO.StringIO()
@@ -95,8 +95,28 @@ class unittests(unittest.TestCase):
       sys.stdout = sys.__stdout__
 	  printtest=capturedOutput.getvalue()
       self.assertTrue(printtest!='Hello failed.')
-	  self.assertTrue(isinstance(funcreturn, list))
+      try:
+      json_insert = json.loads(myjson)
+	  json_test=True
+      except ValueError as e: json_test=False
+
+	  self.assertTrue(json_test)
+
+  def test_sign_cert(self): 
+  #test def sign_cert() check for correct work function and return value and test value is JSON
+      self.assertTrue(get_open_ports()!=None)
+  	  bootstrapping=is_bootstrapping()
+  	  if bootstrapping:device_id=generate_device_id()
+  	  else:deviceid = get_device_id()
+
+  	  gen_key=generate_cert(deviceid); rsign_cert=sign_cert(gen_key['csr'], device_id)
+  	  self.assertTrue(rsign_cert!=None)
+  	  try:
+      json_insert = json.loads(rsign_cert)
+	  json_test=True
+      except ValueError as e: json_test=False
 	  
+	  self.assertTrue(json_test)
 	  
 if __name__ == '__main__':
     unittest.main(failfast=True, exit=False)
