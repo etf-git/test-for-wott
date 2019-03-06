@@ -1,13 +1,18 @@
 from agent import _init_
 import unittest
+from unittest import mock
+  try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 class unittests(unittest.TestCase):
   def test_is_bootstrapping(self):
   #test def is_bootstrapping() for return True
       self.assertTrue(is_bootstrapping())
-# Don't understand who make test for can_read_cert() 
-# def test_can_read_cert(self):
-#      self.assertTrue()
+  def test_can_read_cert(self):
+  #test def is_bootstrapping() check for correct function, no exit
+    self.assertTrue(self.assertTrue()!=1)
   def test_get_primary_ip(self):
   #test def get_primary_ip() checking for an explicit return value and for matching the result against the pattern of the ip-address
       self.assertTrue(get_primary_ip()!=None)
@@ -53,6 +58,14 @@ class unittests(unittest.TestCase):
   def test_get_open_ports(self):
   #test def get_open_ports() checking for an explicit return value
       self.assertTrue(get_open_ports()!=None)
+  def test_send_ping(self):
+  #test def send_ping() checking for an explicit return value
+      capturedOutput = StringIO.StringIO()
+      sys.stdout = capturedOutput
+      send_ping()
+      sys.stdout = sys.__stdout__
+	  printtest=capturedOutput.getvalue()
+      self.assertTrue(printtest!='Ping failed.')
 	  
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(exit=False)
