@@ -134,5 +134,20 @@ class unittests(unittest.TestCase):
 	  
 	  self.assertTrue(json_test)
 	  
+  def test_main(self): 
+  #test def main() check for correct work function and print is no on value bad exit message
+      funcreturn=main(); rfunc=True
+	  self.assertTrue(funcreturn!=None)
+	  capturedOutput = StringIO.StringIO()
+      sys.stdout = capturedOutput
+      main()
+      sys.stdout = sys.__stdout__
+	  printtest=capturedOutput.getvalue()
+	  
+	  if re.search(r'\bUnable to retrieve CA cert. Exiting.\b', funcreturn): rfunc=False
+	  if re.search(r'\bUnable to sign CSR. Exiting.\b', funcreturn): rfunc=False
+	  
+	  self.assertTrue(rfunc)
+	  
 if __name__ == '__main__':
     unittest.main(failfast=True, exit=False)
