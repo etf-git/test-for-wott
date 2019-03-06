@@ -118,5 +118,21 @@ class unittests(unittest.TestCase):
 	  
 	  self.assertTrue(json_test)
 	  
+  def test_renew_cert(self): 
+  #test def renew_cert() check for correct work function and return value and test value is JSON
+      self.assertTrue(get_open_ports()!=None)
+  	  bootstrapping=is_bootstrapping()
+  	  if bootstrapping:device_id=generate_device_id()
+  	  else:deviceid = get_device_id()
+
+  	  gen_key=generate_cert(deviceid); rsign_cert=renew_cert(gen_key['csr'], device_id)
+  	  self.assertTrue(rsign_cert!=None)
+  	  try:
+      json_insert = json.loads(rsign_cert)
+	  json_test=True
+      except ValueError as e: json_test=False
+	  
+	  self.assertTrue(json_test)
+	  
 if __name__ == '__main__':
     unittest.main(failfast=True, exit=False)
